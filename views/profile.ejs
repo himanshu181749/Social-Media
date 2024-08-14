@@ -7,7 +7,8 @@
     <title>User Profile</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body class="bg-gradient-to-r from-blue-500 to-indigo-600 min-h-screen flex">
+  <body class="bg-gradient-to-r from-blue-500 to-indigo-600 min-h-screen flex" >
+ 
     <!-- Profile Section -->
     <div class="bg-white p-8 rounded-lg shadow-lg w-1/4 min-w-max">
       <h1 class="text-3xl font-bold mb-6 text-gray-800">Hello, <%= user.username%></h1>
@@ -34,6 +35,7 @@
         </form>
       </div>
     </div>
+
     <!-- Posts Section -->
     <div class="bg-white p-8 rounded-lg shadow-lg w-3/4 min-w-max ml-6">
       <h2 class="text-2xl font-bold mb-4 text-gray-800">Your Posts</h2>
@@ -49,5 +51,6 @@
         <% }); %>
       </ul>
     </div>
+
   </body>
 </html>

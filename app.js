@@ -16,8 +16,8 @@ app.use(cookieParser())
 mongoose.connect('mongodb://127.0.0.1:27017/miniproject');
 
 // basic boiler plate --------------------------------------------------------------------------------
-app.use(express.static(path.join(__dirname, 'public')));
-
+// app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 app.use(express.json());
@@ -43,6 +43,8 @@ function isLoggedIn(req, res, next) {
 app.get('/', function (req, res) {
   // res.send('helloooo');
   res.render("register");
+  // res.render("homepage");
+
 });
 
 app.get("/login", function(req, res){
@@ -50,9 +52,19 @@ app.get("/login", function(req, res){
   res.render("login");
 })
 
+app.get("/homepage", function(req, res){
+  // res.send("logged In");
+  res.render("homepage");
+})
+
 app.get("/register", function(req, res){
   // res.send("logged In");
   res.render("register");
+})
+
+app.get("/userposts", function(req, res){
+  // res.send("logged In");
+  res.render("userposts");
 })
 
 app.get("/profile", isLoggedIn, async function(req, res) {
@@ -110,7 +122,8 @@ app.post("/login", async function(req, res) {
       if(result) {
         // If passwords match, generate a new token and set it in the cookies
         res.cookie("token", jwt.sign({ username, password}, "PRANJALI"));
-        return res.redirect("/profile");
+        // return res.redirect("/profile");
+        return res.redirect("/homepage");
       }
       else {
         // If passwords do not match, redirect to login page
