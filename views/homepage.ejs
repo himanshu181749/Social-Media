@@ -148,99 +148,28 @@
 
     <!-- Posts Grid -->
     <div class="container mx-auto mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-        <!-- Post 1 -->
-        <div class="p-6 bg-main text-gray-800 rounded-lg shadow-lg cursor-pointer" onclick="openModal('modal1')">
-            <img src="/bg.jpg" alt="Post 1 Image" class="mb-4 rounded-lg">
-            <div class="post-content">
-                <div class="post-header">
-                    <h2 class="text-2xl font-semibold post-title">First Post</h2>
-                    <img src="/user.png" alt="User 1 Photo">
-                    <!-- <div class="username text-username" onclick="redirectToUser('user1')">@JohnDoe</div>  -->
-
-                     <div class="username text-username" onclick="redirectToUser('userposts')">@JohnDoe</div> 
-                     <!--WRITE USERNAME IN PLACE OF USERPOSTS IN ALL REQUIRED PLACES -->
-
+        <% if (posts.length > 0) { %>
+            <% posts.forEach((post, index) => { %>
+                <div class="p-6 bg-main text-gray-800 rounded-lg shadow-lg cursor-pointer" onclick="openModal('modal<%= index %>')">
+                    <img src="/bg.jpg" alt="Post <%= index + 1 %> Image" class="mb-4 rounded-lg">
+                    <div class="post-content">
+                        <div class="post-header">
+                            <h2 class="text-2xl font-semibold post-title"><%= post.title %></h2>
+                            <img src="https://avatar.iran.liara.run/public" alt="User Photo">
+                            <a class="username text-username" href="/<%= post.username %>">@<%= post.username %></a>
+                        </div>
+                        <p><%= post.content %></p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-accent">Posted on: <%= post.date %></span>
+                            <span class="text-accent">Comments: <%= post.comments %></span>
+                        </div>
+                    </div>
                 </div>
-                <p>This is the content of the first post. It's a great way to start the conversation!</p>
-                <div class="flex justify-between items-center">
-                    <span class="text-accent">Posted on: August 12, 2024</span>
-                    <span class="text-accent">Comments: 5</span>
-                </div>
-            </div>
-        </div>
-        <!-- Post 2 -->
-        <div class="p-6 bg-main text-gray-800 rounded-lg shadow-lg cursor-pointer" onclick="openModal('modal2')">
-            <img src="/bg.jpg" alt="Post 2 Image" class="mb-4 rounded-lg">
-            <div class="post-content">
-                <div class="post-header">
-                    <h2 class="text-2xl font-semibold post-title">Second Post</h2>
-                    <img src="/user.png" alt="User 2 Photo">
-                    <div class="username text-username" onclick="redirectToUser('userposts')">@JaneSmith</div>
-                </div>
-                <p>Here's another post with some interesting content. Feel free to comment and share your thoughts!</p>
-                <div class="flex justify-between items-center">
-                    <span class="text-accent">Posted on: August 12, 2024</span>
-                    <span class="text-accent">Comments: 5</span>
-                </div>
-            </div>
-        </div>
-        <!-- Post 3 -->
-        <div class="p-6 bg-main text-gray-800 rounded-lg shadow-lg cursor-pointer" onclick="openModal('modal3')">
-            <img src="/bg.jpg" alt="Post 3 Image" class="mb-4 rounded-lg">
-            <div class="post-content">
-                <div class="post-header">
-                    <h2 class="text-2xl font-semibold post-title">Third Post</h2>
-                    <img src="/user.png" alt="User 3 Photo">
-                    <div class="username text-username" onclick="redirectToUser('userposts')">@AliceBrown</div>
-                </div>
-                <p>This is the third post in our feed. Keep the posts coming and engage with the community!</p>
-                <div class="flex justify-between items-center">
-                    <span class="text-accent">Posted on: August 12, 2024</span>
-                    <span class="text-accent">Comments: 5</span>
-                </div>
-            </div>
-        </div>
-        <!-- Add more posts as needed -->
+            <% }) %>
+        <% } %>
     </div>
 
-    <!-- Modal 1 -->
-    <div id="modal1" class="modal" onclick="closeModal(event)">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <img src="/bg.jpg" alt="Post 1">
-            <div>
-                <span class="close" onclick="closeModal('modal1')">&times;</span>
-                <h2>First Post</h2>
-                <p>This is the full content of the first post. It's a great way to start the conversation!</p>
-                <div class="modal-username" onclick="redirectToUser('userposts')">@JohnDoe</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal 2 -->
-    <div id="modal2" class="modal" onclick="closeModal(event)">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <img src="/bg.jpg" alt="Post 2">
-            <div>
-                <span class="close" onclick="closeModal('modal2')">&times;</span>
-                <h2>Second Post</h2>
-                <p>This is the full content of the second post. Feel free to comment and share your thoughts!</p>
-                <div class="modal-username" onclick="redirectToUser('userposts')">@JaneSmith</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal 3 -->
-    <div id="modal3" class="modal" onclick="closeModal(event)">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <img src="/bg.jpg" alt="Post 3">
-            <div>
-                <span class="close" onclick="closeModal('modal3')">&times;</span>
-                <h2>Third Post</h2>
-                <p>This is the full content of the third post. Keep the posts coming and engage with the community!</p>
-                <div class="modal-username" onclick="redirectToUser('userposts')">@AliceBrown</div>
-            </div>
-        </div>
-    </div>
+    <!-- modals likhe huye the yaha pe-------------------------------------------------------------------------------- -->
 
     <script>
         // Function to open modal

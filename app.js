@@ -52,9 +52,13 @@ app.get("/login", function(req, res){
   res.render("login");
 })
 
-app.get("/homepage", function(req, res){
+app.get("/home", async function(req, res){
+  const {username, password} = req.body;
+  let user = await userModel.findOne({ username: username });
+  let posts= await PostModel.find().populate("user");
+
   // res.send("logged In");
-  res.render("homepage");
+  res.render("homepage", {posts: posts});
 })
 
 app.get("/register", function(req, res){
@@ -62,10 +66,19 @@ app.get("/register", function(req, res){
   res.render("register");
 })
 
-app.get("/userposts", function(req, res){
-  // res.send("logged In");
-  res.render("userposts");
-})
+// app.get("/userposts", function(req, res){
+//   // res.send("logged In");
+//   res.render("userposts");
+// })
+
+app.get('/:username', async (req, res) => {
+  const username = req.params.username;
+  const posts = await PostModel.find({ username });
+
+  // console.log(username);
+  // console.log(posts)
+  res.render('userposts', { posts : posts });
+});
 
 app.get("/profile", isLoggedIn, async function(req, res) {
   const token = req.cookies.token;
@@ -92,7 +105,7 @@ app.post("/create", async function(req, res) {
 
   if (user) {
       // If user already exists, redirect to login page
-      return res.render("/login");
+      return res.render("login");
   }
 
   // If user does not exist, create a new user
@@ -111,6 +124,9 @@ app.post("/create", async function(req, res) {
 app.post("/login", async function(req, res) {
   const {username, password} = req.body;
   let user = await userModel.findOne({ username: username });
+  let posts= await PostModel.find().populate("user");
+  // let postUser = await PostModel.findOne({ username: username });
+  // console.log(posts);
 
   if(!user) {
     // If user does not exist, redirect to register page
@@ -123,7 +139,10 @@ app.post("/login", async function(req, res) {
         // If passwords match, generate a new token and set it in the cookies
         res.cookie("token", jwt.sign({ username, password}, "PRANJALI"));
         // return res.redirect("/profile");
-        return res.redirect("/homepage");
+        // return res.redirect("/homepage");
+        // console.log(posts[0]);
+        res.render("homepage", {posts: posts});
+        // res.render("homepage", {postUsers: postUsers});
       }
       else {
         // If passwords do not match, redirect to login page
@@ -133,6 +152,25 @@ app.post("/login", async function(req, res) {
   }
 })
 
+// app.post("/create-post", async function (req, res) {
+//   let { title, content } = req.body;
+
+//   // Decode the token to get the username
+//   const token = req.cookies.token;
+//   const decoded = jwt.verify(token, "PRANJALI");
+
+//   console.log({ title, content, username: decoded.username });
+
+//   const post = await PostModel.create({ title, content, username: decoded.username });
+//   const user = await userModel.findOne({ username: decoded.username });
+
+//   user.posts.push(post._id);
+//   await user.save();
+
+//   // Redirect to the profile page or handle the response
+//   res.redirect("/profile");
+// });
+
 app.post("/create-post", async function (req, res) {
   let { title, content } = req.body;
 
@@ -140,15 +178,22 @@ app.post("/create-post", async function (req, res) {
   const token = req.cookies.token;
   const decoded = jwt.verify(token, "PRANJALI");
 
+  console.log({ title, content, username: decoded.username });
+
+  // Create the post with the username
   const post = await PostModel.create({ title, content, username: decoded.username });
+
+  // Find the user by username
   const user = await userModel.findOne({ username: decoded.username });
 
+  // Add the post to the user's posts array
   user.posts.push(post._id);
   await user.save();
 
   // Redirect to the profile page or handle the response
   res.redirect("/profile");
 });
+
 
 
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile - @Username</title>
+    <title>User Profile - @<%= posts[0].username %></title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         /* Custom colors from the new palette */
@@ -21,8 +21,8 @@
     <!-- Navbar -->
     <nav class="bg-secondary p-4 sticky top-0 z-10">
         <ul class="flex justify-center items-center gap-10 text-white">
-            <li><a href="/homepage" class="text-lg font-semibold">Home</a></li>
-            <li><a href="/userposts" class="text-lg font-semibold">Posts</a></li>
+            <li><a href="/home" class="text-lg font-semibold">Home</a></li>
+            <!-- <li><a href="/userposts" class="text-lg font-semibold">Posts</a></li> -->
             <li><a href="/profile" class="text-lg font-semibold">My Profile</a></li>
             <li><a href="/logout" class="text-lg font-semibold">Logout</a></li>
         </ul>
@@ -31,39 +31,31 @@
     <!-- User Info Section -->
     <section class="bg-secondary text-white p-8">
         <div class="container mx-auto flex flex-col md:flex-row items-center">
-            <img src="/user.png" alt="User Photo" class="w-32 h-32 rounded-full mb-4 md:mb-0">
+            <img src="https://avatar.iran.liara.run/public" alt="User Photo" class="w-32 h-32 rounded-full mb-4 md:mb-0">
             <div class="ml-0 md:ml-8 text-center md:text-left">
-                <h1 class="text-3xl font-bold">@Username</h1>
+                <h1 class="text-3xl font-bold text-blue-600">@<%= posts[0].username %></h1>
                 <p class="text-highlight mt-2">Bio: A short description about the user, their interests, and what they typically post about.</p>
                 <p class="text-primary mt-2">Joined: January 2024</p>
-                <p class="text-primary mt-2">Total Posts: 15</p>
+                <p class="text-primary mt-2">Total Posts: <%= posts.length%></p>
             </div>
         </div>
     </section>
 
     <!-- User's Posts Grid -->
     <div class="container mx-auto mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4 flex-grow">
-        <!-- Example Post 1 -->
-        <div class="p-6 bg-white text-gray-800 rounded-lg shadow-lg">
-            <img src="/bg.jpg" alt="Post 1" class="mb-4 rounded-lg">
-            <h2 class="text-2xl font-semibold text-primary mb-2">First Post</h2>
-            <p class="mb-4">This is the content of the first post. It’s a great way to start the conversation!</p>
-            <div class="flex justify-between items-center">
-                <span class="text-secondary">Posted on: August 12, 2024</span>
-                <span class="text-highlight">Comments: 5</span>
-            </div>
-        </div>
-        <!-- Example Post 2 -->
-        <div class="p-6 bg-white text-gray-800 rounded-lg shadow-lg">
-            <img src="/bg.jpg" alt="Post 2" class="mb-4 rounded-lg">
-            <h2 class="text-2xl font-semibold text-primary mb-2">Second Post</h2>
-            <p class="mb-4">Here’s another post with some interesting content. Feel free to comment and share your thoughts!</p>
-            <div class="flex justify-between items-center">
-                <span class="text-secondary">Posted on: August 10, 2024</span>
-                <span class="text-highlight">Comments: 8</span>
-            </div>
-        </div>
-        <!-- Add more posts here as needed -->
+        <% if (posts.length > 0) { %>
+            <% posts.forEach((post, index) => { %>
+                <div class="p-6 bg-white text-gray-800 rounded-lg shadow-lg">
+                    <img src="/bg.jpg" alt="Post 2" class="mb-4 rounded-lg">
+                    <h2 class="text-2xl font-semibold text-primary mb-2"><%= post.title %></h2>
+                    <p class="mb-4"><%= post.content %></p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-secondary">Posted on: August 10, 2024</span>
+                        <span class="text-highlight">Comments: 8</span>
+                    </div>
+                </div>
+            <% }) %>
+        <% } %>
     </div>
 
     <!-- Footer -->

@@ -1,0 +1,54 @@
+<!-- modal in the homepage----------------------------------------------------------------------------------------- -->
+
+<!-- Modal 1 -->
+    <div id="modal1" class="modal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <img src="/bg.jpg" alt="Post 1">
+            <div>
+                <span class="close" onclick="closeModal('modal1')">&times;</span>
+                <h2>First Post</h2>
+                <p>This is the full content of the first post. It's a great way to start the conversation!</p>
+                <div class="modal-username" onclick="redirectToUser('<%= post.username%>')">@JohnDoe</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2 -->
+    <div id="modal2" class="modal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <img src="/bg.jpg" alt="Post 2">
+            <div>
+                <span class="close" onclick="closeModal('modal2')">&times;</span>
+                <h2>Second Post</h2>
+                <p>This is the full content of the second post. Feel free to comment and share your thoughts!</p>
+                <div class="modal-username" onclick="redirectToUser('userposts')">@JaneSmith</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3 -->
+    <div id="modal3" class="modal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <img src="/bg.jpg" alt="Post 3">
+            <div>
+                <span class="close" onclick="closeModal('modal3')">&times;</span>
+                <h2>Third Post</h2>
+                <p>This is the full content of the third post. Keep the posts coming and engage with the community!</p>
+                <div class="modal-username" onclick="redirectToUser('userposts')">@AliceBrown</div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- userpost grid Example---------------------------------------------------------------------------------- -->
+    <div class="p-6 bg-white text-gray-800 rounded-lg shadow-lg">
+        <img src="/bg.jpg" alt="Post 2" class="mb-4 rounded-lg">
+        <h2 class="text-2xl font-semibold text-primary mb-2">Second Post</h2>
+        <p class="mb-4">Here’s another post with some interesting content. Feel free to comment and share your thoughts!</p>
+        <div class="flex justify-between items-center">
+            <span class="text-secondary">Posted on: August 10, 2024</span>
+            <span class="text-highlight">Comments: 8</span>
+        </div>
+    </div>
