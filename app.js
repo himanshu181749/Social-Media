@@ -1,10 +1,14 @@
 const express = require('express');
+const fs = require('fs');
 const app = express();
 const mongoose=require("mongoose")
 
 const path = require('path');
+const multer = require('multer');
+
 const userModel = require('./models/user');
 const PostModel = require('./models/post');
+const Story = require('./models/story');
 
 // ---------------------------------------------------------------------------------
 const jwt = require('jsonwebtoken')
@@ -16,14 +20,27 @@ app.use(cookieParser())
 mongoose.connect('mongodb://127.0.0.1:27017/miniproject');
 
 // basic boiler plate --------------------------------------------------------------------------------
-// app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // boiler plate ends----------------------------------------------------------------------------------------------
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/images');
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({ storage: storage });
+
+
 
 //middlewares for protected routes ------------------------------------------------------------------------------
 function isLoggedIn(req, res, next) {
@@ -71,7 +88,7 @@ app.get("/register", function(req, res){
 //   res.render("userposts");
 // })
 
-app.get('/:username', async (req, res) => {
+app.get('/users/:username', async (req, res) => {
   const username = req.params.username;
   const posts = await PostModel.find({ username });
 
@@ -79,6 +96,36 @@ app.get('/:username', async (req, res) => {
   // console.log(posts)
   res.render('userposts', { posts : posts });
 });
+
+
+// getting stories----------------------------------------------------------------------------------------------------------------
+
+
+// app.get('/stories', isLoggedIn, async (req, res) => {
+//   try {
+//     const stories = await Story.find().populate('user').sort({ createdAt: -1 });
+//     res.render('stories', { stories });
+//   } catch (err) {
+//     console.error(err);
+//     res.redirect('/');
+//   }
+// });
+
+app.get('/stories', isLoggedIn, async (req, res) => {
+  const stories = await Story.find().populate('user').sort({ createdAt: -1 });
+    
+  // Read the image files from the /public/images directory
+  const imagesDir = path.join(__dirname, 'public', 'images');
+  const images = fs.readdirSync(imagesDir);
+    
+    // console.log(images);
+    // res.send("okay...yaha v reels BC");
+    res.render('stories', {images});
+    
+});
+
+
+
 
 app.get("/profile", isLoggedIn, async function(req, res) {
   const token = req.cookies.token;
@@ -95,6 +142,7 @@ app.get("/profile", isLoggedIn, async function(req, res) {
 app.get("/logout", function(req, res) {
   res.clearCookie("token");
   res.redirect("/");
+  // res.redirect("/register");
 })
 
 //creating the new user ------------------------------------------------------------------------------------------------
@@ -105,7 +153,8 @@ app.post("/create", async function(req, res) {
 
   if (user) {
       // If user already exists, redirect to login page
-      return res.render("login");
+      // return res.render("login");
+      res.send("Username or Email already exists, Take me Home")
   }
 
   // If user does not exist, create a new user
@@ -171,6 +220,7 @@ app.post("/login", async function(req, res) {
 //   res.redirect("/profile");
 // });
 
+// creating posts ----------------------------------------------------------------------------------------------------------------
 app.post("/create-post", async function (req, res) {
   let { title, content } = req.body;
 
@@ -194,11 +244,16 @@ app.post("/create-post", async function (req, res) {
   res.redirect("/profile");
 });
 
+//creating stories --------------------------------------------------------------------------------------------------------------------
+app.post('/story', isLoggedIn, upload.single('content'), async (req, res) => {
+  console.log(req.body, req.file);
+  res.send(
+    `File uploaded successfully! <a href="/images/${req.file.filename}">View Image</a>`
+  );
+});
 
 
 
-
-
-
+// listening app -----------------------------------------------------------------------------------------------
 
 app.listen(3000);

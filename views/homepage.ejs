@@ -132,8 +132,7 @@
     <!-- Navbar -->
     <nav class="navbar sticky-navbar bg-secondary p-4">
         <ul class="flex justify-center items-center gap-10 text-gray-800">
-            <li><a href="/homepage" class="text-lg font-semibold">Home</a></li>
-            <!-- <li><a href="/homepage" class="text-lg font-semibold">Posts</a></li> -->
+            <li><a href="/home" class="text-lg font-semibold">Home</a></li>
             <li><a href="/profile" class="text-lg font-semibold">My Profile</a></li>
             <li><a href="/logout" class="text-lg font-semibold">Logout</a></li>
         </ul>
@@ -150,13 +149,13 @@
     <div class="container mx-auto mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
         <% if (posts.length > 0) { %>
             <% posts.forEach((post, index) => { %>
-                <div class="p-6 bg-main text-gray-800 rounded-lg shadow-lg cursor-pointer" onclick="openModal('modal<%= index %>')">
+                <div class="p-6 bg-main text-gray-800 rounded-lg shadow-lg cursor-pointer">
                     <img src="/bg.jpg" alt="Post <%= index + 1 %> Image" class="mb-4 rounded-lg">
                     <div class="post-content">
                         <div class="post-header">
                             <h2 class="text-2xl font-semibold post-title"><%= post.title %></h2>
                             <img src="https://avatar.iran.liara.run/public" alt="User Photo">
-                            <a class="username text-username" href="/<%= post.username %>">@<%= post.username %></a>
+                            <a class="username text-username" href="/users/<%= post.username %>">@<%= post.username %></a>
                         </div>
                         <p><%= post.content %></p>
                         <div class="flex justify-between items-center">
@@ -192,6 +191,7 @@
             /* window.location.href = `/user/${username}`; */
             window.location.href = `/userposts`; 
         }
+    
     </script>
 
     <!-- Footer -->

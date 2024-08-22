@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile - @<%= posts[0].username %></title>
+    <title>User Profile - @<%= posts[0].username%></title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         /* Custom colors from the new palette */
@@ -17,23 +17,34 @@
     </style>
 </head>
 <body class="bg-main text-gray-800 flex flex-col min-h-screen">
-
-    <!-- Navbar -->
     <nav class="bg-secondary p-4 sticky top-0 z-10">
         <ul class="flex justify-center items-center gap-10 text-white">
-            <li><a href="/home" class="text-lg font-semibold">Home</a></li>
-            <!-- <li><a href="/userposts" class="text-lg font-semibold">Posts</a></li> -->
-            <li><a href="/profile" class="text-lg font-semibold">My Profile</a></li>
-            <li><a href="/logout" class="text-lg font-semibold">Logout</a></li>
+            <li>
+                <form action="/home" method="GET">
+                    <button type="submit" class="text-lg font-semibold bg-transparent border-none text-white">Home</button>
+                </form>
+            </li>
+            <li>
+                <form action="/profile" method="GET">
+                    <button type="submit" class="text-lg font-semibold bg-transparent border-none text-white">My Profile</button>
+                </form>
+            </li>
+            <li>
+                <form action="/logout" method="GET">
+                    <button type="submit" class="text-lg font-semibold bg-transparent border-none text-white">Logout</button>
+                </form>
+            </li>
         </ul>
     </nav>
+    
 
     <!-- User Info Section -->
     <section class="bg-secondary text-white p-8">
         <div class="container mx-auto flex flex-col md:flex-row items-center">
             <img src="https://avatar.iran.liara.run/public" alt="User Photo" class="w-32 h-32 rounded-full mb-4 md:mb-0">
             <div class="ml-0 md:ml-8 text-center md:text-left">
-                <h1 class="text-3xl font-bold text-blue-600">@<%= posts[0].username %></h1>
+                <!-- <h1 class="text-3xl font-bold text-blue-600">@hardcoded</h1> -->
+                <h1 class="text-3xl font-bold text-blue-600">@<%= posts[0].username%></h1>
                 <p class="text-highlight mt-2">Bio: A short description about the user, their interests, and what they typically post about.</p>
                 <p class="text-primary mt-2">Joined: January 2024</p>
                 <p class="text-primary mt-2">Total Posts: <%= posts.length%></p>

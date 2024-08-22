@@ -5,15 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>User Profile</title>
+    <style>
+      /* Custom colors from the new palette */
+      .bg-main { background-color: #F7F6F2; } /* Soft White */
+      .bg-secondary { background-color: #BFD9D2; } 
+      .text-primary { color: #2E2E2E; } /* Dark Grey */
+      .text-secondary { color: #FF5A5F; } /* Coral Red */
+      .text-highlight { color: #00A699; } /* Teal */
+  </style>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="bg-gradient-to-r from-blue-500 to-indigo-600 min-h-screen flex" >
  
     <!-- Profile Section -->
-    <div class="bg-white p-8 rounded-lg shadow-lg w-1/4 min-w-max">
+    <div class="h-full bg-white p-8 rounded-lg shadow-lg w-1/4 min-w-max">
       <h1 class="text-3xl font-bold mb-6 text-gray-800">Hello, <%= user.username%></h1>
       <div class="mb-6">
-        <img src="https://avatar.iran.liara.run/public/42" alt="User Avatar" class="w-32 h-32 rounded-full mx-auto border-4 border-indigo-500">
+        <img src="https://shorturl.at/J6Cv2" alt="User Avatar" class="w-32 h-32 rounded-full mx-auto border-4 border-indigo-500">
       </div>
       <div class="mb-6">
         <p class="text-xl font-semibold text-gray-800">You can create posts now:</p>
@@ -28,6 +36,10 @@
           <textarea id="content" name="content" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Enter post content" required></textarea>
         </div>
         <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg shadow focus:outline-none focus:shadow-outline">Create Post</button>
+      </form>
+      <form action="/story" method="POST" enctype="multipart/form-data">
+        <input type="file" name="content" accept="image/*" required>
+        <button type="submit">Add to Story</button>
       </form>
       <form action="/home" method="GET">
         <button type="submit" class="w-full bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg shadow focus:outline-none focus:shadow-outline mb-3">Go Home</button>
