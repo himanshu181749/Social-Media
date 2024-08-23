@@ -1,19 +1,28 @@
 # 📱 The Socials
 
-![Socials](https://your-image-url.com) <!-- Replace with your project's image or logo -->
+
+
+[Watch the Video](./public/readme/socials.mkv)
+<!-- Replace with your project's image or logo -->
 
 ## 🏗️ Project Overview
 
 The Socials is a typical modern web application designed to provide platform connect users through posts and stories. Users can create profiles, share content, and engage with others in a visually appealing environment. Built with a focus on usability and aesthetics, this platform provides a seamless user experience.
 
+![Socials](./public/readme/home.png)
+![Socials](./public/readme/profile.jpeg)
+
 ## 🌟 Key Features
 
 - **User Profiles**: Users can create personalized profiles with avatars and bios.
 - **Post Creation**: Users can share thoughts and updates through text-based posts.
-- **Story Sharing**: A feature for uploading images / files to share temporary stories.
+- **Story Sharing**: A feature for uploading images to share anonymous temporary stories.
 - **Infinite Scroll**: Allows users to scroll through posts and stories
 - **Responsive Design**: Optimized for both mobile and desktop viewing.
 - **Intuitive Navigation**: Easy-to-use interface for enhanced user engagement.
+
+![Socials](./public/readme/userposts.jpeg)
+![Socials](./public/readme/stories.png)
 
 ## 🔧 Technologies Used
 
