@@ -5,19 +5,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Stories</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    /* Custom color classes */
+    .bg-main { background-color: #BFD9D2; } /* Light Sage Green */
+    .bg-secondary { background-color: #BFD9D2; } /* Light Sage Green */
+    .bg-light { background-color: #F9F9F9; } /* Off-White */
+    .text-accent { color: #7F8C8D; } /* Cool Gray */
+    .text-highlight { color: #B2BABB; } /* Light Gray */
+    .text-username { color: #1E90FF; } /* Blue for usernames */
+    .text-heading { color: #34495E; } /* Darker Gray for headings */
+  </style>
 </head>
-<body class="bg-gray-100">
-  <div class="container mx-auto py-8">
-    <h1 class="text-3xl font-bold mb-6">Stories</h1>
+<body class="bg-light">
+
+  <!-- Navbar -->
+  <nav class="navbar sticky top-0 z-10 bg-secondary p-4 backdrop-filter backdrop-blur-lg bg-opacity-70">
+    <ul class="flex justify-center items-center gap-10 text-gray-700">
+      <li>
+        <form action="/home" method="GET">
+          <button type="submit" class="text-lg font-semibold bg-transparent border-none hover:text-heading transition-colors duration-300">Home</button>
+        </form>
+      </li>
+      <li>
+        <form action="/profile" method="GET">
+          <button type="submit" class="text-lg font-semibold bg-transparent border-none hover:text-heading transition-colors duration-300">My Profile</button>
+        </form>
+      </li>
+      <li>
+        <form action="/stories" method="GET">
+          <button type="submit" class="text-lg font-semibold bg-transparent border-none hover:text-heading transition-colors duration-300">Stories</button>
+        </form>
+      </li>
+      <li>
+        <form action="/logout" method="GET">
+          <button type="submit" class="text-lg font-semibold bg-transparent border-none hover:text-heading transition-colors duration-300">Logout</button>
+        </form>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Content Container -->
+  <div class="container mx-auto py-8 px-4">
+    <!-- Page Heading -->
+    <h1 class="text-center text-4xl font-bold mb-10 text-heading tracking-wide">Explore Beautiful Stories</h1>
     
     <!-- Story List -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       <% images.forEach(image => { %>
-        <div class="bg-white p-2 rounded-lg shadow-md">
-          <img src="/images/<%= image %>" alt="Image" class="w-full h-auto rounded-lg">
+        <div class="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <img src="/images/<%= image %>" alt="User Story Image" class="w-full h-auto rounded-lg mb-4">
+          <p class="text-center text-highlight">A serene view, shared by our community.</p>
         </div>
       <% }); %>
     </div>
   </div>
+
+  <!-- Footer -->
+  <footer class="bg-secondary p-4 mt-8 text-center text-accent">
+    All Rights Reserved &copy; 2024
+  </footer>
+
 </body>
 </html>

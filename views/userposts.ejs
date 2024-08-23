@@ -9,6 +9,8 @@
         /* Custom colors from the new palette */
         .bg-main { background-color: #F7F6F2; } /* Soft White */
         .bg-secondary { background-color: #BFD9D2; } 
+        .bg-tert { background-color: #8fb9ad; } 
+
         .text-primary { color: #2E2E2E; } /* Dark Grey */
         .text-secondary { color: #FF5A5F; } /* Coral Red */
         .text-highlight { color: #00A699; } /* Teal */
@@ -17,21 +19,26 @@
     </style>
 </head>
 <body class="bg-main text-gray-800 flex flex-col min-h-screen">
-    <nav class="bg-secondary p-4 sticky top-0 z-10">
-        <ul class="flex justify-center items-center gap-10 text-white">
+    <nav class="bg-tert p-4 sticky top-0 z-10">
+        <ul class="flex justify-center items-center gap-10 text-gray-700">
             <li>
                 <form action="/home" method="GET">
-                    <button type="submit" class="text-lg font-semibold bg-transparent border-none text-white">Home</button>
+                    <button type="submit" class="text-lg font-semibold bg-transparent border-none ">Home</button>
                 </form>
             </li>
             <li>
                 <form action="/profile" method="GET">
-                    <button type="submit" class="text-lg font-semibold bg-transparent border-none text-white">My Profile</button>
+                    <button type="submit" class="text-lg font-semibold bg-transparent border-none ">My Profile</button>
+                </form>
+            </li>
+            <li>
+                <form action="/stories" method="GET">
+                    <button type="submit" class="text-lg font-semibold bg-transparent border-none ">Stories</button>
                 </form>
             </li>
             <li>
                 <form action="/logout" method="GET">
-                    <button type="submit" class="text-lg font-semibold bg-transparent border-none text-white">Logout</button>
+                    <button type="submit" class="text-lg font-semibold bg-transparent border-none">Logout</button>
                 </form>
             </li>
         </ul>
