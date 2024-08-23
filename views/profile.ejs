@@ -83,18 +83,18 @@
             <label for="content" class="block text-sm font-medium text-gray-700">Post Content</label>
             <textarea id="content" name="content" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Enter post content" required></textarea>
           </div>
-          <button type="submit" class="w-full btn-neutral py-2 px-4 rounded-lg shadow focus:outline-none focus:shadow-outline">Create Post</button>
+          <button type="submit" class="w-full btn-neutral py-2 px-4 rounded-lg shadow hover:bg-green-500 focus:outline-none focus:shadow-outline">Create Post</button>
         </form>
         <form action="/story" method="POST" enctype="multipart/form-data" class="mb-6">
           <input type="file" name="content" accept="image/*" class="mb-4 w-full text-gray-700" required>
-          <button type="submit" class="w-full btn-neutral py-2 px-4 rounded-lg shadow focus:outline-none focus:shadow-outline">Add to Story</button>
+          <button type="submit" class="w-full btn-neutral py-2 px-4 rounded-lg shadow hover:bg-yellow-500 focus:outline-none focus:shadow-outline">Add to Story</button>
         </form>
         <form action="/home" method="GET" class="mb-3">
-          <button type="submit" class="w-full btn-neutral py-2 px-4 rounded-lg shadow focus:outline-none focus:shadow-outline">Go Home</button>
+          <button type="submit" class="w-full btn-neutral py-2 px-4 rounded-lg shadow hover:bg-blue-500 focus:outline-none focus:shadow-outline">Go Home</button>
         </form>
         <div>
           <form action="/logout" method="GET">
-            <button type="submit" class="w-full btn-neutral py-2 px-4 rounded-lg shadow focus:outline-none focus:shadow-outline">Logout</button>
+            <button type="submit" class="w-full btn-neutral py-2 px-4 rounded-lg shadow hover:bg-red-500 focus:outline-none focus:shadow-outline">Logout</button>
           </form>
         </div>
       </div>
