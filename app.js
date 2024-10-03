@@ -16,9 +16,11 @@ const bcrypt = require('bcryptjs')
 const cookieParser = require('cookie-parser')
 app.use(cookieParser())
 
+require("dotenv").config();
+
 // --------------------------------------------------------------------------------------------------------------------------------
 // mongoose.connect('mongodb://127.0.0.1:27017/miniproject');
-mongoose.connect(mongodb+srv://HimanshuGupta:7992423198@cluster0.ioy3c.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0)
+mongoose.connect(process.env.MONGO_URL)
 .then(() => console.log('Connected to MongoDB')).catch(err => console.error('Error connecting to MongoDB:', err));
 
 
