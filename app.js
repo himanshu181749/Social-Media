@@ -18,7 +18,7 @@ app.use(cookieParser())
 
 // --------------------------------------------------------------------------------------------------------------------------------
 // mongoose.connect('mongodb://127.0.0.1:27017/miniproject');
-// mongoose.connect(mongodb+srv://HimanshuGupta:7992423198@cluster0.ioy3c.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0);
+mongoose.connect(mongodb+srv://HimanshuGupta:7992423198@cluster0.ioy3c.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0);
 
 
 
